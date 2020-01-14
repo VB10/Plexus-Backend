@@ -1,11 +1,15 @@
-const express = require('express')
-const bodyParser   = require('body-parser')
-const app          = express()
-const port         = process.env.PORT ||3000
-const loginRouter2 = require('../lib/authentication/login/router/login_router')
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose   = require("mongoose");
 
-app.use(bodyParser.urlencoded({extended:true}));
+// eslint-disable-next-line no-unused-vars
+const _           = mongoose.connect("mongodb://localhost/vbapi");
+const app         = express();
+const port        = process.env.PORT || 3000;
+const loginRouter = require("../lib/authentication/login/router/login_router");
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/api',loginRouter2);
-app.listen(port, () => console.log(`Example app listening on port port!`))
+app.use("/api", loginRouter);
+app.listen(port, () => console.log(`Example app listening on port port!`));
